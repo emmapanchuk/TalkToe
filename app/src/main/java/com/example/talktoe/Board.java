@@ -11,6 +11,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -100,7 +103,7 @@ public class Board extends AppCompatActivity {
             }
         if(result.contains("top") && result.contains("left")){
                 topLeft.setText(playerToggle);
-                boardStatus[0][0] = playerToggle;
+                //boardStatus[0][0] = playerToggle;
         }
 
         else if(result.contains("top") && result.contains("middle")){
@@ -161,7 +164,7 @@ public class Board extends AppCompatActivity {
         }
 
         //check if the newly placed piece allowed a player to win
-        checkBoard();
+      // checkBoard();
 
 
 
@@ -172,21 +175,66 @@ public class Board extends AppCompatActivity {
 
     public void checkBoard(){
 
-
-        for(int i = 0; i < 3; i++){
-            if(boardStatus[i][0].equals(boardStatus[i][1])  && boardStatus[i][1].equals(boardStatus[i][2])){
-                if(boardStatus[i][0].equals("X")){
+        //check horizontally for a winner
+        for(int i = 0; i < 3; i++) {
+            if (boardStatus[i][0].equals(boardStatus[i][1]) && boardStatus[i][1].equals(boardStatus[i][2])) {
+                if (boardStatus[i][0].equals("X")) {
                     winnerResults = playerOne + " has won the game!";
-                }
-                else{
+                } else {
                     winnerResults = playerTwo + " has won the game!";
                 }
             }
 
 
-        //check horizontally for a winner
+        }
 
+        //check vertically for a winner
+        for(int i = 0; i < 3; i++) {
+            if (boardStatus[0][i].equals(boardStatus[1][i]) && boardStatus[1][i].equals(boardStatus[2][i])) {
+                if (boardStatus[0][i].equals("X")) {
+                    winnerResults = playerOne + " has won the game!";
+                } else {
+                    winnerResults = playerTwo + " has won the game!";
+                }
+            }
+        }
+
+        //diagonally
+
+        if((boardStatus[0][0].equals(boardStatus[1][1])) && (boardStatus[0][0].equals(boardStatus[2][2]))){
+
+            if (boardStatus[0][0].equals("X")) {
+                winnerResults = playerOne + " has won the game!";
+            } else {
+                winnerResults = playerTwo + " has won the game!";
+            }
 
         }
+
+         //diagonally
+        if (boardStatus[0][2].equals(boardStatus[1][1]) && (boardStatus[0][2].equals(boardStatus[2][0]))) {
+
+            if (boardStatus[0][2].equals("X")) {
+                winnerResults = playerOne + " has won the game!";
+            } else {
+                winnerResults = playerTwo + " has won the game!";
+            }
+        }
+
+
+
+        return;
     }
+
+    public void storeWinnerReslts(){
+// Write a message to the database
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("message");
+
+        myRef.setValue("Hello, World!");
+    }
+
+
+
+
 }

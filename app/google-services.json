@@ -1,0 +1,44 @@
+{
+  "project_info": {
+    "project_number": "307321391815",
+    "firebase_url": "https://talktoe-f92d7.firebaseio.com",
+    "project_id": "talktoe-f92d7",
+    "storage_bucket": "talktoe-f92d7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:307321391815:android:6d1912b7dce44692",
+        "android_client_info": {
+          "package_name": "com.example.talktoe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "307321391815-u9m4a551spraoimmo383edk4tmig21bf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.talktoe",
+            "certificate_hash": "08610bac26f86b42413909a2bb2a87c6b0479701"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaN_2Ag1uVf0CVj0nqplIoL0DTRboGqrI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "307321391815-vmfa8qn8gvj0q8vg41r1rtbr3v4c5ifk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
