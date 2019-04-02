@@ -45,40 +45,37 @@
         <TableRow>
 
             <Button
-                android:id="@+id/b00"
+                android:id="@+id/topLeft"
+                style="@style/Widget.AppCompat.Button"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:textSize="22sp"
-                android:textColor="#FFFFFF"
+                android:layout_margin="8dp"
                 android:background="@color/colorAccent"
                 android:gravity="center"
-                android:layout_margin="8dp"
-                style="@style/Widget.AppCompat.Button"
-                />
+                android:textColor="#FFFFFF"
+                android:textSize="22sp" />
 
             <Button
-                android:id="@+id/b01"
+                android:id="@+id/topMiddle"
+                style="@style/Widget.AppCompat.Button"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:textSize="22sp"
-                android:textColor="#FFFFFF"
+                android:layout_margin="8dp"
                 android:background="@color/colorAccent"
                 android:gravity="center"
-                android:layout_margin="8dp"
-                style="@style/Widget.AppCompat.Button"
-                />
+                android:textColor="#FFFFFF"
+                android:textSize="22sp" />
 
             <Button
-                android:id="@+id/b02"
+                android:id="@+id/topRight"
+                style="@style/Widget.AppCompat.Button"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:textSize="22sp"
-                android:textColor="#FFFFFF"
+                android:layout_margin="8dp"
                 android:background="@color/colorAccent"
                 android:gravity="center"
-                android:layout_margin="8dp"
-                style="@style/Widget.AppCompat.Button"
-                />
+                android:textColor="#FFFFFF"
+                android:textSize="22sp" />
 
         </TableRow>
 
@@ -86,40 +83,37 @@
         <TableRow>
 
             <Button
-                android:id="@+id/b10"
+                android:id="@+id/centerLeft"
+                style="@style/Widget.AppCompat.Button"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:textSize="22sp"
-                android:textColor="#FFFFFF"
+                android:layout_margin="8dp"
                 android:background="@color/colorAccent"
                 android:gravity="center"
-                android:layout_margin="8dp"
-                style="@style/Widget.AppCompat.Button"
-                />
+                android:textColor="#FFFFFF"
+                android:textSize="22sp" />
 
             <Button
-                android:id="@+id/b11"
+                android:id="@+id/centerMiddle"
+                style="@style/Widget.AppCompat.Button"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:textSize="22sp"
-                android:textColor="#FFFFFF"
+                android:layout_margin="8dp"
                 android:background="@color/colorAccent"
                 android:gravity="center"
-                android:layout_margin="8dp"
-                style="@style/Widget.AppCompat.Button"
-                />
+                android:textColor="#FFFFFF"
+                android:textSize="22sp" />
 
             <Button
-                android:id="@+id/b12"
+                android:id="@+id/centerRight"
+                style="@style/Widget.AppCompat.Button"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:textSize="22sp"
-                android:textColor="#FFFFFF"
+                android:layout_margin="8dp"
                 android:background="@color/colorAccent"
                 android:gravity="center"
-                android:layout_margin="8dp"
-                style="@style/Widget.AppCompat.Button"
-                />
+                android:textColor="#FFFFFF"
+                android:textSize="22sp" />
 
         </TableRow>
 
@@ -127,49 +121,52 @@
         <TableRow>
 
             <Button
-                android:id="@+id/b20"
+                android:id="@+id/bottomLeft"
+                style="@style/Widget.AppCompat.Button"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:textSize="22sp"
-                android:textColor="#FFFFFF"
+                android:layout_margin="8dp"
                 android:background="@color/colorAccent"
                 android:gravity="center"
-                android:layout_margin="8dp"
-                style="@style/Widget.AppCompat.Button"
-                />
+                android:textColor="#FFFFFF"
+                android:textSize="22sp" />
 
             <Button
-                android:id="@+id/b21"
+                android:id="@+id/bottomMiddle"
+                style="@style/Widget.AppCompat.Button"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:textSize="22sp"
-                android:textColor="#FFFFFF"
+                android:layout_margin="8dp"
                 android:background="@color/colorAccent"
                 android:gravity="center"
-                android:layout_margin="8dp"
-                style="@style/Widget.AppCompat.Button"
-                />
+                android:textColor="#FFFFFF"
+                android:textSize="22sp" />
 
             <Button
-                android:id="@+id/b22"
+                android:id="@+id/bottomRight"
+                style="@style/Widget.AppCompat.Button"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:textSize="22sp"
-                android:textColor="#FFFFFF"
+                android:layout_margin="8dp"
                 android:background="@color/colorAccent"
                 android:gravity="center"
-                android:layout_margin="8dp"
-                style="@style/Widget.AppCompat.Button"
-                />
+                android:textColor="#FFFFFF"
+                android:textSize="22sp" />
 
         </TableRow>
 
     </TableLayout>
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/speechButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/speak_button" />
+
+    <TextView
+        android:id="@+id/speechOutputTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
 
 </LinearLayout>

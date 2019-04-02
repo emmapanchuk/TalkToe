@@ -36,4 +36,8 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, Board.class);
         startActivity(intent);
     }
+
+    //resources
+    //
+    //https://stacktips.com/tutorials/android/speech-to-text-in-android
 }
