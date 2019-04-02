@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TalkToe</string>
+    <string name="player_one">Player 1:</string>
+    <string name="player_two">Player 2:</string>
+    <string name="speak_button">Speak</string>
+
+</resources>
