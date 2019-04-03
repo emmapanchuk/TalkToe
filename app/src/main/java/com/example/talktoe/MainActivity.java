@@ -12,13 +12,17 @@ import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
     Button playButton;
+    String playerOne, playerTwo;
+    EditText playerOneInput, playerTwoInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         playButton = findViewById(R.id.playButton);
+
 
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,7 +37,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void startGame() {
         Log.v("Testing:", "start game activity called");
+        playerOneInput = findViewById(R.id.playerOneInput);
+        playerTwoInput = findViewById(R.id.playerTwoInput);
+        playerOne = playerOneInput.getText().toString();
+        playerTwo = playerTwoInput.getText().toString();
+
+
         Intent intent = new Intent(this, Board.class);
+        intent.putExtra("PlayerOne", playerOne);
+        intent.putExtra("PlayerTwo", playerTwo);
         startActivity(intent);
     }
 

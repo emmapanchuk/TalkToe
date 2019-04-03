@@ -29,17 +29,32 @@ public class Board extends AppCompatActivity {
     String result;
     Button topLeft, topMiddle, topRight, centerLeft, centerMiddle, centerRight, bottomLeft, bottomMiddle, bottomRight;
     String playerToggle;
-    String playerOne, playerTwo;
+    static String playerOne, playerTwo;
+    static String nextPlayer;
     String winnerResults;
+    TextView playerOneName, playerTwoName;
 
-    String[][] boardStatus = new String[3][3];
+    String[][] boardStatus = {{"a", "b", "c"}, {"d", "e","f"}, {"g","h","i"}};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.board);
+
+        Intent intent = getIntent();
+        playerOne = intent.getStringExtra("PlayerOne");
+        playerTwo = intent.getStringExtra("PlayerTwo");
+
+        playerOneName = findViewById(R.id.playerOneName);
+        playerOneName.setText(playerOne);
+
+        playerTwoName = findViewById(R.id.playerTwoName);
+        playerTwoName.setText(playerTwo);
+        nextPlayer = playerTwo;
+
         speechOutputTextView = findViewById(R.id.speechOutputTextView);
         speechButton = findViewById(R.id.speechButton);
+
 
 
         playerToggle = "X";
@@ -92,7 +107,7 @@ public class Board extends AppCompatActivity {
         if (resultCode == RESULT_OK) {
             List<String> results = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
             for (int i = 0; i < results.size(); i++) {
-                result = results.get(i);
+                result = results.get(i).toLowerCase();
                 Log.i("SpeechDemo", "## INFO 05: Result: " + result );
                 speechOutput.add(result);
                 speechOutputTextView.setText(result);
@@ -101,49 +116,67 @@ public class Board extends AppCompatActivity {
 
 
             }
-        if(result.contains("top") && result.contains("left")){
+        if(result.contains("top") && result.contains("left") && boardStatus[0][0].equals("a")){
                 topLeft.setText(playerToggle);
-                //boardStatus[0][0] = playerToggle;
+                boardStatus[0][0] = playerToggle;
+                checkBoard();
+                switchPlayer();
         }
 
-        else if(result.contains("top") && result.contains("middle")){
+        else if(result.contains("top") && result.contains("middle")&& boardStatus[0][1].equals("b")){
                 topMiddle.setText(playerToggle);
                 boardStatus[0][1] = playerToggle;
+                checkBoard();
+                switchPlayer();
         }
 
-        else if(result.contains("top") && result.contains("right")){
+        else if(result.contains("top") && result.contains("right")&& boardStatus[0][2].equals("c")){
             topRight.setText(playerToggle);
             boardStatus[0][2] = playerToggle;
+            checkBoard();
+            switchPlayer();
         }
 
-        else if(result.contains("center") && result.contains("left")){
+        else if(result.contains("center") && result.contains("left")&& boardStatus[1][0].equals("d")){
             centerLeft.setText(playerToggle);
             boardStatus[1][0] = playerToggle;
+            checkBoard();
+            switchPlayer();
         }
 
-        else if(result.contains("center") && result.contains("middle")){
+        else if(result.contains("center") && result.contains("middle")&& boardStatus[1][1].equals("e")){
             centerMiddle.setText(playerToggle);
             boardStatus[1][1] = playerToggle;
+            checkBoard();
+            switchPlayer();
         }
 
-        else if(result.contains("center") && result.contains("right")){
+        else if(result.contains("center") && result.contains("right")&& boardStatus[1][2].equals("f")){
             centerRight.setText(playerToggle);
             boardStatus[1][2] = playerToggle;
+            checkBoard();
+            switchPlayer();
         }
 
-        else if(result.contains("bottom") && result.contains("left")){
+        else if(result.contains("bottom") && result.contains("left")&& boardStatus[2][0].equals("g")){
             bottomLeft.setText(playerToggle);
             boardStatus[2][0] = playerToggle;
+            checkBoard();
+            switchPlayer();
         }
 
-        else if(result.contains("bottom") && result.contains("middle")){
+        else if(result.contains("bottom") && result.contains("middle")&& boardStatus[2][1].equals("h")){
             bottomMiddle.setText(playerToggle);
             boardStatus[2][1] = playerToggle;
+            checkBoard();
+            switchPlayer();
         }
 
-        else if(result.contains("bottom") && result.contains("right")){
+        else if(result.contains("bottom") && result.contains("right")&& boardStatus[2][2].equals("i")){
             bottomRight.setText(playerToggle);
             boardStatus[2][2] = playerToggle;
+            checkBoard();
+            switchPlayer();
         }
 
         else{
@@ -163,8 +196,8 @@ public class Board extends AppCompatActivity {
             }
         }
 
-        //check if the newly placed piece allowed a player to win
-      // checkBoard();
+        checkBoard();
+        switchPlayer();
 
 
 
@@ -180,8 +213,11 @@ public class Board extends AppCompatActivity {
             if (boardStatus[i][0].equals(boardStatus[i][1]) && boardStatus[i][1].equals(boardStatus[i][2])) {
                 if (boardStatus[i][0].equals("X")) {
                     winnerResults = playerOne + " has won the game!";
+                    break;
                 } else {
                     winnerResults = playerTwo + " has won the game!";
+                    break;
+
                 }
             }
 
@@ -193,8 +229,10 @@ public class Board extends AppCompatActivity {
             if (boardStatus[0][i].equals(boardStatus[1][i]) && boardStatus[1][i].equals(boardStatus[2][i])) {
                 if (boardStatus[0][i].equals("X")) {
                     winnerResults = playerOne + " has won the game!";
+                    break;
                 } else {
                     winnerResults = playerTwo + " has won the game!";
+                    break;
                 }
             }
         }
@@ -205,8 +243,11 @@ public class Board extends AppCompatActivity {
 
             if (boardStatus[0][0].equals("X")) {
                 winnerResults = playerOne + " has won the game!";
-            } else {
+
+            }
+            else {
                 winnerResults = playerTwo + " has won the game!";
+
             }
 
         }
@@ -223,15 +264,29 @@ public class Board extends AppCompatActivity {
 
 
 
-        return;
+
     }
 
-    public void storeWinnerReslts(){
+    public void storeWinnerResults(){
 // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("message");
 
         myRef.setValue("Hello, World!");
+    }
+
+    public void switchPlayer(){
+
+        if(playerToggle.equals("X")){
+            playerToggle = "O";
+        }
+
+        else{
+            playerToggle = "X";
+        }
+
+        SwitchDialog dialog = new SwitchDialog();
+        dialog.show(getSupportFragmentManager(), "test");
     }
 
 

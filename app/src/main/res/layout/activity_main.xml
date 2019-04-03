@@ -24,7 +24,7 @@
         android:layout_marginLeft="72dp"
         android:layout_marginBottom="10dp"
         android:text="@string/player_one"
-        app:layout_constraintBottom_toTopOf="@+id/editText2"
+        app:layout_constraintBottom_toTopOf="@+id/playerTwoInput"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -37,30 +37,30 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/playerOneInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="17dp"
         android:layout_marginRight="17dp"
         android:layout_marginBottom="309dp"
         android:ems="10"
+        android:hint="Name"
         android:inputType="textPersonName"
-        android:text="Name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/playerTwoInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="11dp"
         android:layout_marginEnd="17dp"
         android:layout_marginRight="17dp"
         android:ems="10"
+        android:hint="Name"
         android:inputType="textPersonName"
-        android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/playerOneInput" />
 
     <TextView
         android:id="@+id/textView3"
