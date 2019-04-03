@@ -33,6 +33,7 @@ public class Board extends AppCompatActivity {
     static String nextPlayer;
     String winnerResults;
     TextView playerOneName, playerTwoName;
+    String winnerName;
 
     String[][] boardStatus = {{"a", "b", "c"}, {"d", "e","f"}, {"g","h","i"}};
 
@@ -270,9 +271,21 @@ public class Board extends AppCompatActivity {
     public void storeWinnerResults(){
 // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("message");
+        DatabaseReference myDatabase = database.getReference();
 
-        myRef.setValue("Hello, World!");
+        myDatabase = FirebaseDatabase.getInstance().getReference();
+
+
+
+        Users user = new Users(winnerName);
+
+
+
+
+
+        myDatabase.child("name" + winnerName).setValue(user);
+
+        Toast.makeText(this, "Written to database!", Toast.LENGTH_SHORT).show();
     }
 
     public void switchPlayer(){
