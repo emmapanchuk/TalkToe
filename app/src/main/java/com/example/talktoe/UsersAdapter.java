@@ -75,10 +75,10 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersViewHol
         public UsersViewHolder(View UsersView){
             super(UsersView);
 
-            textViewUsersTitle = itemView.findViewById(R.id.textViewUsersTitle);
-            textViewUsersDate = itemView.findViewById(R.id.textViewUsersDate);
-            textViewUsersTime = itemView.findViewById(R.id.textViewUsersTime);
-            textViewUsersID = itemView.findViewById(R.id.textViewUsersID);
+          //  textViewUsersTitle = itemView.findViewById(R.id.textViewUsersTitle);
+          //  textViewUsersDate = itemView.findViewById(R.id.textViewUsersDate);
+          //  textViewUsersTime = itemView.findViewById(R.id.textViewUsersTime);
+          //  textViewUsersID = itemView.findViewById(R.id.textViewUsersID);
 
         }
 

@@ -34,6 +34,7 @@ public class Board extends AppCompatActivity {
     String winnerResults;
     TextView playerOneName, playerTwoName;
     String winnerName;
+    private DatabaseReference mDatabase;
 
     String[][] boardStatus = {{"a", "b", "c"}, {"d", "e","f"}, {"g","h","i"}};
 
@@ -55,6 +56,8 @@ public class Board extends AppCompatActivity {
 
         speechOutputTextView = findViewById(R.id.speechOutputTextView);
         speechButton = findViewById(R.id.speechButton);
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
 
 
@@ -214,9 +217,11 @@ public class Board extends AppCompatActivity {
             if (boardStatus[i][0].equals(boardStatus[i][1]) && boardStatus[i][1].equals(boardStatus[i][2])) {
                 if (boardStatus[i][0].equals("X")) {
                     winnerResults = playerOne + " has won the game!";
+                    storeWinnerResults();
                     break;
                 } else {
                     winnerResults = playerTwo + " has won the game!";
+                    storeWinnerResults();
                     break;
 
                 }
@@ -270,10 +275,8 @@ public class Board extends AppCompatActivity {
 
     public void storeWinnerResults(){
 // Write a message to the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myDatabase = database.getReference();
 
-        myDatabase = FirebaseDatabase.getInstance().getReference();
+       // mDatabase = FirebaseDatabase.getInstance().getReference();
 
 
 
@@ -283,7 +286,8 @@ public class Board extends AppCompatActivity {
 
 
 
-        myDatabase.child("name" + winnerName).setValue(user);
+        mDatabase.child("users").child(winnerName).setValue(user);
+        Log.d("DB", "Writing " + winnerName + "to the database");
 
         Toast.makeText(this, "Written to database!", Toast.LENGTH_SHORT).show();
     }
@@ -291,7 +295,8 @@ public class Board extends AppCompatActivity {
     public void switchPlayer(){
 
         if(playerToggle.equals("X")){
-            playerToggle = "O";
+            playerToggle = "X";
+            //CHANGE BACK TO O AFTER
         }
 
         else{
