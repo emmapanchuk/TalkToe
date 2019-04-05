@@ -6,6 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/talktoe" />
+
     <Button
         android:id="@+id/playButton"
         android:layout_width="wrap_content"
@@ -20,9 +28,9 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
-        android:layout_marginLeft="72dp"
         android:layout_marginBottom="10dp"
+        android:layout_marginLeft="72dp"
+        android:layout_marginStart="72dp"
         android:text="@string/player_one"
         app:layout_constraintBottom_toTopOf="@+id/playerTwoInput"
         app:layout_constraintStart_toStartOf="parent" />
@@ -40,9 +48,9 @@
         android:id="@+id/playerOneInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="309dp"
         android:layout_marginEnd="17dp"
         android:layout_marginRight="17dp"
-        android:layout_marginBottom="309dp"
         android:ems="10"
         android:hint="Name"
         android:inputType="textPersonName"
@@ -53,22 +61,13 @@
         android:id="@+id/playerTwoInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="11dp"
         android:layout_marginEnd="17dp"
         android:layout_marginRight="17dp"
+        android:layout_marginTop="11dp"
         android:ems="10"
         android:hint="Name"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/playerOneInput" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="98dp"
-        android:text="@string/app_name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

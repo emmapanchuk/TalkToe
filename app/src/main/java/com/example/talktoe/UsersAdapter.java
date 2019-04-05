@@ -58,7 +58,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersViewHol
 
         //
         usersViewHolder.textViewUsersName.setText(user.getName());
-        Log.d("INSERT INTO DISPLAY", "USERS NAME: " + user.getName());
+        Log.d("INSERT INTO DISPLAY", "USERS NAME: " + user.getName() + " Score: " + user.getScore());
         usersViewHolder.textViewUsersScore.setText(user.getScore());
 
     }

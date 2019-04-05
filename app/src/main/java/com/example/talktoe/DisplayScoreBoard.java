@@ -54,7 +54,7 @@ public class DisplayScoreBoard extends AppCompatActivity{
 
 
 
-        //myRef = FirebaseDatabase.getInstance().getReference();
+        myRef = FirebaseDatabase.getInstance().getReference("users/");
         myRef.orderByKey().addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
