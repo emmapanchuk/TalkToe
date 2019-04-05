@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -27,7 +28,7 @@ public class Board extends AppCompatActivity {
     ArrayList<String> speechOutput;
     TextView speechOutputTextView;
     String result;
-    Button topLeft, topMiddle, topRight, centerLeft, centerMiddle, centerRight, bottomLeft, bottomMiddle, bottomRight;
+    Button topLeft, topMiddle, topRight, centerLeft, centerMiddle, centerRight, bottomLeft, bottomMiddle, bottomRight, scoreboardButton;
     String playerToggle;
     static String playerOne, playerTwo;
     static String nextPlayer;
@@ -59,6 +60,9 @@ public class Board extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
+        winnerName = "Emma";
+        storeWinnerResults();;
+
 
 
         playerToggle = "X";
@@ -80,6 +84,14 @@ public class Board extends AppCompatActivity {
 
 
         speechOutput = new ArrayList<String>();
+
+        scoreboardButton = findViewById(R.id.scoreboardButton);
+        scoreboardButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewScoreboard();
+            }
+        });
 
         speechButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -287,7 +299,7 @@ public class Board extends AppCompatActivity {
 
 
         mDatabase.child("users").child(winnerName).setValue(user);
-        Log.d("DB", "Writing " + winnerName + "to the database");
+        Log.d("DB", "Writing " + winnerName + " to the database");
 
         Toast.makeText(this, "Written to database!", Toast.LENGTH_SHORT).show();
     }
@@ -305,6 +317,12 @@ public class Board extends AppCompatActivity {
 
         SwitchDialog dialog = new SwitchDialog();
         dialog.show(getSupportFragmentManager(), "test");
+    }
+
+    public void viewScoreboard(){
+
+        Intent intent = new Intent(this, DisplayScoreBoard.class);
+        startActivity(intent);
     }
 
 

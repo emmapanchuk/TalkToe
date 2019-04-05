@@ -4,6 +4,7 @@ package com.example.talktoe;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,15 +19,15 @@ import java.util.List;
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersViewHolder>{
 
     private Context mCtx;
-    private List<Users> UsersList;
+    private List<Users> usersList;
     DatabaseReference mDatabase;
 
     TextView id;
 
 
-    public UsersAdapter(Context mCtx, List<Users> UsersList) {
+    public UsersAdapter(Context mCtx, List<Users> usersList) {
         this.mCtx = mCtx;
-        this.UsersList = UsersList;
+        this.usersList = usersList;
 
 
     }
@@ -52,33 +53,31 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersViewHol
 
 
     @Override
-    public void onBindViewHolder(@NonNull UsersViewHolder UsersViewHolder, int position) {
-        Users Users = UsersList.get(position);
+    public void onBindViewHolder(@NonNull UsersViewHolder usersViewHolder, int position) {
+        Users user = usersList.get(position);
 
         //
-     //   UsersViewHolder.textViewUsersTitle.setText(Users.getUsers());
-     //   UsersViewHolder.textViewUsersDate.setText(Users.getDate());
-     //   UsersViewHolder.textViewUsersTime.setText(Users.getTime());
-     //   UsersViewHolder.textViewUsersID.setText(Users.getID());
+        usersViewHolder.textViewUsersName.setText(user.getName());
+        Log.d("INSERT INTO DISPLAY", "USERS NAME: " + user.getName());
+        usersViewHolder.textViewUsersScore.setText(user.getScore());
+
     }
 
     @Override
     public int getItemCount() {
-        return UsersList.size();
+        return usersList.size();
     }
 
     class UsersViewHolder extends RecyclerView.ViewHolder {
 
 
-        TextView textViewUsersTitle, textViewUsersDate, textViewUsersTime, textViewUsersID;
+        TextView textViewUsersName, textViewUsersScore;
 
-        public UsersViewHolder(View UsersView){
-            super(UsersView);
+        public UsersViewHolder(View usersView){
+            super(usersView);
 
-          //  textViewUsersTitle = itemView.findViewById(R.id.textViewUsersTitle);
-          //  textViewUsersDate = itemView.findViewById(R.id.textViewUsersDate);
-          //  textViewUsersTime = itemView.findViewById(R.id.textViewUsersTime);
-          //  textViewUsersID = itemView.findViewById(R.id.textViewUsersID);
+            textViewUsersName = itemView.findViewById(R.id.textViewUsersName);
+            textViewUsersScore = itemView.findViewById(R.id.textViewUsersScore);
 
         }
 

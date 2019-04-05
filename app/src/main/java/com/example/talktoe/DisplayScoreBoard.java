@@ -18,6 +18,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,8 +29,9 @@ public class DisplayScoreBoard extends AppCompatActivity{
 
     RecyclerView recyclerView;
     UsersAdapter adapter;
-    List<Users> UsersList;
-    DatabaseReference mDatabase;
+    List<Users> usersList;
+    DatabaseReference myRef;
+    FirebaseDatabase database;
 
 
 
@@ -38,9 +40,12 @@ public class DisplayScoreBoard extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_scoreboard);
 
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference();
 
 
-        UsersList = new ArrayList<>();
+
+        usersList = new ArrayList<>();
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
@@ -49,21 +54,30 @@ public class DisplayScoreBoard extends AppCompatActivity{
 
 
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.orderByKey().addChildEventListener(new ChildEventListener() {
+        //myRef = FirebaseDatabase.getInstance().getReference();
+        myRef.orderByKey().addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
                 Users newUsers = dataSnapshot.getValue(Users.class);
-                UsersList.add(newUsers);
+                Log.v("RETRIEVE", "Users name = " + newUsers.getName() + "\n Score value = "  );
+                usersList.add(newUsers);
+
+                Log.d("LENGTH","" + usersList.size());
+
 
 
 
                 createLayout();
 
-             //   Log.v("RETRIEVE", "Users Value = " + newUsers.getUsers() + "\n Date value = " + newUsers.getDate() + "\nTime Value = "+ newUsers.getTime());
 
 
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.d("ERROR TAG", "Failed to read value.", error.toException());
             }
 
 
@@ -73,25 +87,22 @@ public class DisplayScoreBoard extends AppCompatActivity{
 
 
 
-            @Override
+           // @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
 
             }
 
-            @Override
+          //  @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
 
             }
 
-            @Override
+          //  @Override
             public void onChildMoved(DataSnapshot dataSnapshot, String s) {
 
             }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
 
-            }
         });
 
 
@@ -105,7 +116,7 @@ public class DisplayScoreBoard extends AppCompatActivity{
 
     public void createLayout(){
 
-        adapter = new UsersAdapter(this, UsersList);
+        adapter = new UsersAdapter(this, usersList);
         recyclerView.setAdapter(adapter);
 
 
