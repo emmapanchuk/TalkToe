@@ -60,7 +60,7 @@ public class DisplayScoreBoard extends AppCompatActivity{
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
                 Users newUsers = dataSnapshot.getValue(Users.class);
-                Log.v("RETRIEVE", "Users name = " + newUsers.getName() + "\n Score value = "  );
+                Log.v("RETRIEVE", "Users name = " + newUsers.getName() + "\n Score value = " + newUsers.getScore() );
                 usersList.add(newUsers);
 
                 Log.d("LENGTH","" + usersList.size());

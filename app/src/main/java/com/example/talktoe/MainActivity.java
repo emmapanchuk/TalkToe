@@ -1,3 +1,6 @@
+//resources:
+//
+//https://stacktips.com/tutorials/android/speech-to-text-in-android
 //https://medium.com/wiselteach/tic-tac-toe-tablelayout-android-app-androidmonk-a56b9e1c6a15
 
 package com.example.talktoe;
@@ -49,7 +52,5 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    //resources
-    //
-    //https://stacktips.com/tutorials/android/speech-to-text-in-android
+
 }

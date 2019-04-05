@@ -1,3 +1,8 @@
+//resources:
+//
+//https://stacktips.com/tutorials/android/speech-to-text-in-android
+//https://medium.com/wiselteach/tic-tac-toe-tablelayout-android-app-androidmonk-a56b9e1c6a15
+
 package com.example.talktoe;
 
 import android.content.ActivityNotFoundException;
@@ -12,8 +17,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +43,7 @@ public class Board extends AppCompatActivity {
     String winnerResults;
     TextView playerOneName, playerTwoName;
     String winnerName;
-    private DatabaseReference mDatabase;
+    private DatabaseReference mDatabase, userRef;
 
     String[][] boardStatus = {{"a", "b", "c"}, {"d", "e","f"}, {"g","h","i"}};
 
@@ -60,10 +68,7 @@ public class Board extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        winnerName = "Emma";
-        storeWinnerResults();;
-
-
+        winnerName = "";
 
         playerToggle = "X";
 
@@ -212,11 +217,6 @@ public class Board extends AppCompatActivity {
             }
         }
 
-        checkBoard();
-        switchPlayer();
-
-
-
 
 
         }
@@ -286,29 +286,51 @@ public class Board extends AppCompatActivity {
     }
 
     public void storeWinnerResults(){
-// Write a message to the database
 
-       // mDatabase = FirebaseDatabase.getInstance().getReference();
-
+        boolean result = userExists();
 
 
-        Users user = new Users(winnerName);
+        //if the winner does not yet exist in the database, write them to the database
+        if(result == false){
+            Users user = new Users(winnerName);
+            mDatabase.child("users").child(winnerName).setValue(user);
+            Log.d("DB", "Writing new user " + winnerName + " to the database");
+
+            Toast.makeText(this, "Scoreboard has been updated!", Toast.LENGTH_SHORT).show();
+
+
+        }
+
+        else{
+
+            userRef.orderByChild("users").equalTo(winnerName).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+        //fix
+                        Log.d("TESTING", userRef.child("score").getValue());
+                    }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+
+
+            }
 
 
 
 
 
-        mDatabase.child("users").child(winnerName).setValue(user);
-        Log.d("DB", "Writing " + winnerName + " to the database");
 
-        Toast.makeText(this, "Written to database!", Toast.LENGTH_SHORT).show();
-    }
+
+
+      }
 
     public void switchPlayer(){
 
         if(playerToggle.equals("X")){
-            playerToggle = "X";
-            //CHANGE BACK TO O AFTER
+            playerToggle = "O";
         }
 
         else{
@@ -323,6 +345,15 @@ public class Board extends AppCompatActivity {
 
         Intent intent = new Intent(this, DisplayScoreBoard.class);
         startActivity(intent);
+    }
+
+    // Check if the winner already exists in the database.
+    //If the winner exists, return true.
+    public boolean userExists(){
+     userRef = FirebaseDatabase.getInstance().getReference("users/"+ winnerName);
+
+        return (userRef != null);
+
     }
 
 

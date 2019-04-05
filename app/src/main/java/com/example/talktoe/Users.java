@@ -3,7 +3,7 @@ package com.example.talktoe;
 public class Users {
 
 
-    public String name;
+    String name;
     String score;
 
     public Users(){
@@ -12,7 +12,7 @@ public class Users {
 
     public Users(String name){
         this.name = name;
-        this.score = "0";
+        this.score = "1";
 
     }
 
