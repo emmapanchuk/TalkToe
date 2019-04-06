@@ -4,6 +4,8 @@
     <string name="player_two">Player 2:</string>
     <string name="speak_button">Speak</string>
     <string name="play_again_button">PLAY AGAIN</string>
+    <string name="instructions_button">INSTRUCTIONS</string>
+    <string name="scoreboard_button">SCOREBOARD</string>
 
 
 </resources>

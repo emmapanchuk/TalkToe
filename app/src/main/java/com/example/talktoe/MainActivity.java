@@ -10,13 +10,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
     Button playButton;
     String playerOne, playerTwo;
     EditText playerOneInput, playerTwoInput;
+    ImageView animImage;
+    Animation animations;
+    AnimationSet animationSet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +33,23 @@ public class MainActivity extends AppCompatActivity {
 
         playButton = findViewById(R.id.playButton);
 
+
+        animationSet = new AnimationSet(true);
+
+        animImage = findViewById(R.id.animImage);
+        animations = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.movein);
+        animationSet.addAnimation(animations);
+        animations = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotateclockwise);
+        animationSet.addAnimation(animations);
+        animations = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotatecounterclockwise);
+        animationSet.addAnimation(animations);
+        animations = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoomin);
+        animationSet.addAnimation(animations);
+        animations = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoomout);
+        animationSet.addAnimation(animations);
+        animations = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoombackout);
+        animationSet.addAnimation(animations);
+        animImage.startAnimation(animationSet);
 
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startGame() {
-        Log.v("Testing:", "start game activity called");
+        Log.v("BOARD:", "start game activity called");
         playerOneInput = findViewById(R.id.playerOneInput);
         playerTwoInput = findViewById(R.id.playerTwoInput);
         playerOne = playerOneInput.getText().toString();

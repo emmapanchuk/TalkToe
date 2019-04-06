@@ -40,7 +40,7 @@
         android:id="@+id/glGameBoard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+
 
         android:layout_below="@+id/tvInfo"
         android:rowCount="3"
@@ -177,18 +177,22 @@
         android:id="@+id/speechButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@android:color/holo_purple"
         android:text="@string/speak_button" />
-
-    <TextView
-        android:id="@+id/speechOutputTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
 
     <Button
         android:id="@+id/scoreboardButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="SCOREBOARD" />
+        android:background="@android:color/holo_orange_light"
+        android:text="@string/scoreboard_button" />
+
+    <Button
+        android:id="@+id/instructionsButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:text="@string/instructions_button" />
+
 
 </LinearLayout>

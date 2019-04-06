@@ -1,5 +1,7 @@
 package com.example.talktoe;
 
+//Resources:
+//https://www.simplifiedcoding.net/android-recyclerview-cardview-tutorial/#RecyclerView-Item-Layout-using-CardView
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -10,8 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+
 
 import java.util.List;
 
@@ -20,9 +21,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersViewHol
 
     private Context mCtx;
     private List<Users> usersList;
-    DatabaseReference mDatabase;
 
-    TextView id;
 
 
     public UsersAdapter(Context mCtx, List<Users> usersList) {
@@ -33,10 +32,6 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersViewHol
     }
 
 
-
-//   public interface onItemLongClickListener{
-    //       public boolean onItemLongClicked(int position);
-    //  }
 
     @NonNull
     @Override
@@ -51,12 +46,12 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersViewHol
 
 
 
-
+    //Each user from usersList will be inserted into their own block using a recycler view
     @Override
     public void onBindViewHolder(@NonNull UsersViewHolder usersViewHolder, int position) {
         Users user = usersList.get(position);
 
-        //
+
         usersViewHolder.textViewUsersName.setText(user.getName());
         Log.d("INSERT INTO DISPLAY", "USERS NAME: " + user.getName() + " Score: " + user.getScore());
         usersViewHolder.textViewUsersScore.setText(user.getScore());
