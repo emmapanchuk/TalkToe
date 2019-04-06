@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,6 +29,7 @@ import java.util.List;
 import java.util.Locale;
 
 import static android.media.MediaRecorder.AudioSource.VOICE_RECOGNITION;
+import static java.lang.Integer.parseInt;
 
 public class Board extends AppCompatActivity {
 
@@ -44,6 +46,8 @@ public class Board extends AppCompatActivity {
     TextView playerOneName, playerTwoName;
     String winnerName;
     private DatabaseReference mDatabase, userRef;
+    boolean existsResult;
+    DatabaseReference myRef;
 
     String[][] boardStatus = {{"a", "b", "c"}, {"d", "e","f"}, {"g","h","i"}};
 
@@ -68,7 +72,7 @@ public class Board extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        winnerName = "";
+        winnerName = "PLEASEWORK";
 
         playerToggle = "X";
 
@@ -85,7 +89,7 @@ public class Board extends AppCompatActivity {
 
 
 
-
+        userExists();
 
 
         speechOutput = new ArrayList<String>();
@@ -287,11 +291,11 @@ public class Board extends AppCompatActivity {
 
     public void storeWinnerResults(){
 
-        boolean result = userExists();
+      // boolean result = userExists();
 
-
+        //userExists();
         //if the winner does not yet exist in the database, write them to the database
-        if(result == false){
+        if(true){
             Users user = new Users(winnerName);
             mDatabase.child("users").child(winnerName).setValue(user);
             Log.d("DB", "Writing new user " + winnerName + " to the database");
@@ -299,34 +303,61 @@ public class Board extends AppCompatActivity {
             Toast.makeText(this, "Scoreboard has been updated!", Toast.LENGTH_SHORT).show();
 
 
-        }
+    }
 
         else{
 
-            userRef.orderByChild("users").equalTo(winnerName).addListenerForSingleValueEvent(new ValueEventListener() {
+
+
+            Log.d("ACCESS", "In update");
+            userRef = FirebaseDatabase.getInstance().getReference("users/");
+
+            userRef.addListenerForSingleValueEvent(new ValueEventListener(){
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-        //fix
-                        Log.d("TESTING", userRef.child("score").getValue());
-                    }
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
+                    Users updateUser = dataSnapshot.getValue(Users.class);
+                    Log.v("RETRIEVEinUPDATE", "Name value = " + updateUser.getName() + "Score value = " + updateUser.getScore());
+                    String scoreString = updateUser.getScore();
+
+                    int score = Integer.parseInt(scoreString);
+
+                    score++;
+                    updateUser.setScore(String.valueOf(score));
+                    userRef.setValue(updateUser);
 
                 }
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                        // Failed to read value
+                        Log.d("ERROR TAG", "Failed to read value.", error.toException());
+                    }
 
 
-            }
+                    public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                    }
+
+                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                    }
+
+
+                    //  @Override
+                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                    }
 
 
 
 
 
 
+            });
 
+        }
 
-      }
-
+    }
     public void switchPlayer(){
 
         if(playerToggle.equals("X")){
@@ -349,12 +380,95 @@ public class Board extends AppCompatActivity {
 
     // Check if the winner already exists in the database.
     //If the winner exists, return true.
-    public boolean userExists(){
-     userRef = FirebaseDatabase.getInstance().getReference("users/"+ winnerName);
+    public void userExists(){
 
-        return (userRef != null);
+        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference userNameRef = rootRef.child("users").child(winnerName);
+        ValueEventListener eventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(!dataSnapshot.exists()) {
+                   createNewUser();
+                }
+                else{
+                    updateUser();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.d("TAG", databaseError.getMessage()); //Don't ignore errors!
+            }
+        };
+        userNameRef.addListenerForSingleValueEvent(eventListener);
+
 
     }
+
+    public void createNewUser(){
+        Users user = new Users(winnerName);
+        mDatabase.child("users").child(winnerName).setValue(user);
+        Log.d("DB", "Writing new user " + winnerName + " to the database");
+
+        Toast.makeText(this, "Scoreboard has been updated!", Toast.LENGTH_SHORT).show();
+
+
+
+    }
+
+    public void updateUser(){
+
+        Log.d("ACCESS", "In update");
+
+        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+        //DatabaseReference userRef = rootRef.child("users").child(winnerName);
+        userRef = FirebaseDatabase.getInstance().getReference().child("users").child(winnerName);
+
+        userRef.addListenerForSingleValueEvent(new ValueEventListener(){
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                Users updateUser = dataSnapshot.getValue(Users.class);
+                Log.v("RETRIEVEinUPDATE", "Name value = " + updateUser.getName() + "Score value = " + updateUser.getScore());
+                String scoreString = updateUser.getScore();
+
+                int score = Integer.parseInt(scoreString);
+
+                score++;
+                updateUser.setScore(String.valueOf(score));
+                userRef.setValue(updateUser);
+
+            }
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.d("ERROR TAG", "Failed to read value.", error.toException());
+            }
+
+
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+
+            //  @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+
+
+
+
+
+        });
+
+    }
+
 
 
 
