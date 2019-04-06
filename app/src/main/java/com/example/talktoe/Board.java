@@ -110,6 +110,88 @@ public class Board extends AppCompatActivity {
         });
     }
 
+
+    public void onClick(View v){
+        switch(v.getId())
+        {
+            case R.id.topLeft:
+                if(boardStatus[0][0].equals("a")){
+                    topLeft.setText(playerToggle);
+                    boardStatus[0][0] = playerToggle;
+                    checkBoard();
+                    switchPlayer();
+                }
+                break;
+            case R.id.topMiddle:
+                if(boardStatus[0][1].equals("b")){
+                    topMiddle.setText(playerToggle);
+                    boardStatus[0][1] = playerToggle;
+                    checkBoard();
+                    switchPlayer();
+                }
+                break;
+            case R.id.topRight:
+                if(boardStatus[0][2].equals("c")){
+                    topRight.setText(playerToggle);
+                    boardStatus[0][2] = playerToggle;
+                    checkBoard();
+                    switchPlayer();
+                }
+                break;
+            case R.id.centerLeft:
+                if(boardStatus[1][0].equals("d")){
+                    centerLeft.setText(playerToggle);
+                    boardStatus[1][0] = playerToggle;
+                    checkBoard();
+                    switchPlayer();
+                }
+                break;
+            case R.id.centerMiddle:
+                if(boardStatus[1][1].equals("e")){
+                    centerMiddle.setText(playerToggle);
+                    boardStatus[1][1] = playerToggle;
+                    checkBoard();
+                    switchPlayer();
+                }
+                break;
+            case R.id.centerRight:
+                if(boardStatus[1][2].equals("f")){
+                    centerRight.setText(playerToggle);
+                    boardStatus[1][2] = playerToggle;
+                    checkBoard();
+                    switchPlayer();
+                }
+                break;
+            case R.id.bottomLeft:
+                if(boardStatus[2][0].equals("g")) {
+                    bottomLeft.setText(playerToggle);
+                    boardStatus[2][0] = playerToggle;
+                    checkBoard();
+                    switchPlayer();
+                }
+                break;
+            case R.id.bottomMiddle:
+                if(boardStatus[2][1].equals("h")){
+                    bottomMiddle.setText(playerToggle);
+                    boardStatus[2][1] = playerToggle;
+                    checkBoard();
+                    switchPlayer();
+                }
+                break;
+            case R.id.bottomRight:
+
+                if(boardStatus[2][2].equals("i")){
+                    bottomRight.setText(playerToggle);
+                    boardStatus[2][2] = playerToggle;
+                    checkBoard();
+                    switchPlayer();
+                }
+                break;
+        }
+
+
+    }
+
     public String speak(){
         speechOutput.clear();
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
@@ -133,7 +215,7 @@ public class Board extends AppCompatActivity {
             List<String> results = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
             for (int i = 0; i < results.size(); i++) {
                 result = results.get(i).toLowerCase();
-                Log.i("SpeechDemo", "## INFO 05: Result: " + result );
+
                 speechOutput.add(result);
                 speechOutputTextView.setText(result);
 

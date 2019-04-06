@@ -2,13 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/background_light"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/playerOne"
+        android:layout_width="168dp"
         android:layout_height="wrap_content"
-        android:text="@string/player_one" />
+        app:srcCompat="@drawable/playerone"
+
+        />
 
     <TextView
         android:id="@+id/playerOneName"
@@ -16,11 +20,14 @@
         android:layout_height="wrap_content"
         android:text="player 1 name" />
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/playertwo"
+        android:layout_width="168dp"
         android:layout_height="wrap_content"
-        android:text="@string/player_two" />
+        app:srcCompat="@drawable/playertwo"
+
+        />
+
 
     <TextView
         android:id="@+id/playerTwoName"
@@ -52,6 +59,7 @@
                 android:layout_margin="8dp"
                 android:background="@color/colorPrimaryDark"
                 android:gravity="center"
+                android:onClick="onClick"
                 android:textColor="#FFFFFF"
                 android:textSize="22sp" />
 
@@ -63,6 +71,7 @@
                 android:layout_margin="8dp"
                 android:background="@color/colorPrimaryDark"
                 android:gravity="center"
+                android:onClick="onClick"
                 android:textColor="#FFFFFF"
                 android:textSize="22sp" />
 
@@ -74,6 +83,7 @@
                 android:layout_margin="8dp"
                 android:background="@color/colorPrimaryDark"
                 android:gravity="center"
+                android:onClick="onClick"
                 android:textColor="#FFFFFF"
                 android:textSize="22sp" />
 
@@ -90,6 +100,7 @@
                 android:layout_margin="8dp"
                 android:background="@color/colorPrimaryDark"
                 android:gravity="center"
+                android:onClick="onClick"
                 android:textColor="#FFFFFF"
                 android:textSize="22sp" />
 
@@ -101,6 +112,7 @@
                 android:layout_margin="8dp"
                 android:background="@color/colorPrimaryDark"
                 android:gravity="center"
+                android:onClick="onClick"
                 android:textColor="#FFFFFF"
                 android:textSize="22sp" />
 
@@ -112,6 +124,7 @@
                 android:layout_margin="8dp"
                 android:background="@color/colorPrimaryDark"
                 android:gravity="center"
+                android:onClick="onClick"
                 android:textColor="#FFFFFF"
                 android:textSize="22sp" />
 
@@ -128,6 +141,7 @@
                 android:layout_margin="8dp"
                 android:background="@color/colorPrimaryDark"
                 android:gravity="center"
+                android:onClick="onClick"
                 android:textColor="#FFFFFF"
                 android:textSize="22sp" />
 
@@ -139,6 +153,7 @@
                 android:layout_margin="8dp"
                 android:background="@color/colorPrimaryDark"
                 android:gravity="center"
+                android:onClick="onClick"
                 android:textColor="#FFFFFF"
                 android:textSize="22sp" />
 
@@ -150,6 +165,7 @@
                 android:layout_margin="8dp"
                 android:background="@color/colorPrimaryDark"
                 android:gravity="center"
+                android:onClick="onClick"
                 android:textColor="#FFFFFF"
                 android:textSize="22sp" />
 
